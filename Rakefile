@@ -3,12 +3,13 @@ require 'fileutils'
 task :default => ['init']
 
 task :init do
-  puts 'Removing repository files...'
-  FileUtils.remove_dir('.git') if Dir.exist? '.git'
-  FileUtils.remove('.gitignore') if File.exist? '.gitignore'
-
   puts 'Installing dependencies...'
   system 'bundle install', [:out, :err] => File::NULL
+
+  puts "Creating 'bots.json' in the 'config_files' directory..."
+  File.open('config_files/bots.json', 'w') do |file|
+    file.write('{}')
+  end
 
   unless File.exist?('db/data.db')
     puts 'Initializing database...'
