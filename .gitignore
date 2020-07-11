@@ -1,3 +1,2 @@
-# Uncomment line below once 'rake init' has been run
 config_files/bots.json
 db/data.db

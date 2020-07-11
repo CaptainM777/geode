@@ -4,12 +4,10 @@ task :default => ['init']
 
 task :init do
   puts 'Installing dependencies...'
-  system 'bundle install', [:out, :err] => File::NULL
+  system 'bundle install'
 
   puts "Creating 'bots.json' in the 'config_files' directory..."
-  File.open('config_files/bots.json', 'w') do |file|
-    file.write('{}')
-  end
+  File.open('config_files/bots.json', 'w') { |file| file.write('{}') }
 
   unless File.exist?('db/data.db')
     puts 'Initializing database...'
