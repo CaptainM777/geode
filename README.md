@@ -17,3 +17,5 @@ Changes I made:
 2. Read through the readme in the `config_files/` directory so that you can properly configure the bot
 3. Fill out `config_files/bots.json` and `config_files/config.yml`
 4. Run `thor geode:start` (or `thor geode -s` for short) on the command line. It will automatically load all crystals present in the `app/main` directory. To run crystals present in the `app/dev` directory, run `thor geode:start -d` for dev crystals, `thor geode:start -a` to run all crystals, and `thor geode:start --load-only=one two three` to run only the specified crystals.
+
+## Other

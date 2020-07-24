@@ -3,6 +3,9 @@ require 'fileutils'
 task :default => ['init']
 
 task :init do
+  puts 'Removing .git...'
+  FileUtils.remove_dir('.git') if Dir.exist? '.git'
+
   puts 'Installing dependencies...'
   system 'bundle install'
 

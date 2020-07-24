@@ -34,6 +34,7 @@ module Bot
   # Removes any fields from the config hash that were left blank in 'config.yml'
   config.reject!{ |k,v| v.nil? }
 
+  # Loads the bot settings file
   bots = YAML.load_file("#{config_folder_path}/bots.json")
 
   # Loads the token and prefix from 'bots.json' and creates entries for them in the config hash
