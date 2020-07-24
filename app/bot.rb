@@ -16,31 +16,34 @@ module Bot
 
   # Sets path to the data folder as environment variable
   ENV['DATA_PATH'] = File.expand_path('data')
-  config_folder_path = File.expand_path("#{ENV['DATA_PATH']}/config_files")
 
-  # Loads the master config file and converts all the keys to symbols
+  # Converts the 'config_files' path into an absolute path
+  config_folder_path = File.expand_path("config_files")
+
+  puts "Loading bot settings..."
+
+  # Loads the master config file and converts the keys to symbols so that they can be properly parsed by the CommandBot constructor
   config = YAML.load_file("#{config_folder_path}/config.yml").transform_keys(&:to_sym)
+
+  send_error_message("The 'bot' field in 'config.yml' hasn't been filled out") if config[:bot].nil?
 
   # Converts the values for 'log_mode' and 'type' to symbols so that they can be properly parsed by the CommandBot constructor
   config[:log_mode] = config[:log_mode].to_sym
   config[:type] = config[:type].to_sym
 
-  puts "Loading bot settings..."
-
-  send_error_message("The 'bot' field in 'config.yml' hasn't been filled out") if config[:bot].nil?
-
   # Removes any fields from the config hash that were left blank in 'config.yml'
   config.reject!{ |k,v| v.nil? }
 
   bots = YAML.load_file("#{config_folder_path}/bots.json")
+
   # Loads the token and prefix from 'bots.json' and creates entries for them in the config hash
   if bots.has_key?(config[:bot])
     bot_name = config[:bot]
-    config[:token] = bots[bot_name][:token] if bots[bot_name][:token]
-    config[:prefix] = bots[bot_name][:prefix] if bots[bot_name][:prefix]
+    config[:token] = bots[bot_name]["token"] if bots[bot_name]["token"]
+    config[:prefix] = bots[bot_name]["prefix"] if bots[bot_name]["prefix"]
 
     unless config[:token] && config[:prefix]
-      send_error_message("The bot you want to use is missing either a 'token' or a 'prefix' field in the 'bots.json' file")
+      send_error_message("The bot you want to use (#{bot_name}) is missing either a 'token' or a 'prefix' field in the 'bots.json' file")
     end
   else
     send_error_message("The bot name given in 'config.yml' is not in the 'bots.json' file")
