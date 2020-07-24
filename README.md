@@ -4,11 +4,11 @@ This fork is a modification of [Geode](https://github.com/hecksalmonids/geode) f
 
 Changes I made:
 * Moved all configuration files to `config_files/` and added a readme there
-* Made changes to the `config.yml` file:
+* Made changes to the `config.yml`:
   * Eliminated optional fields that I had no interest in using
   * Restructured the commented field descriptions
 * Made changes to `Rakefile`:
-  * `.git` and `.gitignore` will no longer be deleted
+  * `.gitignore` will no longer be deleted
   * A `bots.json` file will be created in the `config_files/` upon running `rake init`
 * Removed a line of code from `geode/templates/crystal_generate_template.erb` that included models for each generated crystal
 
@@ -19,3 +19,4 @@ Changes I made:
 4. Run `thor geode:start` (or `thor geode -s` for short) on the command line. It will automatically load all crystals present in the `app/main` directory. To run crystals present in the `app/dev` directory, run `thor geode:start -d` for dev crystals, `thor geode:start -a` to run all crystals, and `thor geode:start --load-only=one two three` to run only the specified crystals.
 
 ## Other
+If you want to see what you can do with Geode once you're done setting it up, click [here](https://github.com/hecksalmonids/geode#user-content-development). Ignore the instructions above the "Development" header, as that information is specific to the original repo.

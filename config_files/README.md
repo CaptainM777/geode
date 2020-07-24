@@ -3,7 +3,9 @@
 This folder contains configuration files used for setting up the bot before running it.
 
 ## bots.json
-Stores information about the bots that are available to use, including their names, bot tokens, and prefixes. This file is created upon running `rake init`.
+**IMPORTANT:** This file is created upon running `rake init`. It is *not* available when you first clone the repo.
+
+Stores information about the bots that are available to use, including their names, bot tokens, and prefixes. 
 
 Information in this file should be written like this:
 ```
